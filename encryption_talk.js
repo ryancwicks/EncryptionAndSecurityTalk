@@ -6,7 +6,7 @@ var DH_key_exchange = function () {
     const speed = 30;
     const width = window.innerWidth*0.8;
     const height = window.innerWidth*0.6;
-    const radius = 50;
+    const radius = height/12;
     const velocity = width/100;
     var canvas = document.getElementById(canvas_id);
     var ctx; //drawing context
@@ -23,6 +23,11 @@ var DH_key_exchange = function () {
             velocity: velocity,
             color: color,
             label: label,
+
+            request_pos: function(x, y) {
+                this.request_x = x;
+                this.request_y = y;
+            },
 
             draw: function() {
                 let circle=new Path2D();
@@ -82,24 +87,71 @@ var DH_key_exchange = function () {
         if (animation_steps.length === 0) {
             //reload the animation steps, push new animation steps onto the queue.
             animation_steps = [];
+            
+            //Generate the secrets and common paint
             animation_steps.push( ()=>{
                     balls = {
-                        "ball1": generate_ball(width/6, height/3, "green", "key 1"), 
-                        "ball2": generate_ball(width*5/6, height/3, "blue", "key 2")
+                        "secret_alice": generate_ball(width/6, height/4, "orangered", "Secret A"), 
+                        "secret_bob": generate_ball(width*5/6, height/4, "teal", "Secret B"),
+                        "common_a": generate_ball(width/2, height/2, "yellow", "Common Public"),
+                        "common_b": generate_ball(width/2, height/2, "yellow", "Common Public")
                     }; 
                 } );
+            //Get a copy of the common
             animation_steps.push( ()=>{
-                    balls.ball1.request_x = width/2;
-                    balls.ball1.request_y = height/2;
-                    balls.ball2.request_x = width/2;
-                    balls.ball2.request_y = height/2;
-                });
+                balls.common_a.request_pos(width/6, height/2);
+                balls.common_b.request_pos(width*5/6, height/2);
+            });
+
+            //Move secret over common
             animation_steps.push( ()=>{
-                    balls.ball1.request_x = width/6;
-                    balls.ball1.request_y = height*2/3;
-                    balls.ball2.request_x = width*5/6;
-                    balls.ball2.request_y = height*2/3;
+                    balls.secret_alice.request_pos(width/6, height/2);
+                    balls.secret_bob.request_pos(width*5/6, height/2);
                 });
+            
+            //Mix and move secret back
+            animation_steps.push( ()=>{
+                balls.secret_alice.request_pos(width/6, height/4);
+                balls.secret_bob.request_pos(width*5/6, height/4);
+                balls["a_mix"] = generate_ball(width/6, height/2, "peru", "C+A Public");
+                balls["b_mix"] = generate_ball(width*5/6, height/2, "cyan", "C+B Public");
+                balls.a_mix.request_pos(width/6, height*3/4);
+                balls.b_mix.request_pos(width*5/6, height*3/4);
+            });
+
+            //share the mixed values, remove the common.
+            animation_steps.push( ()=>{
+                balls.a_mix.request_pos(width*5/6, height/2);
+                balls.b_mix.request_pos(width/6, height/2);
+                balls.common_a.request_pos(-width/6, height/2);
+                balls.common_b.request_pos(width*7/6, height/2);
+            });
+            
+            //Mix the secret and the shared common.
+            animation_steps.push( ()=>{
+                balls.secret_alice.request_pos(width/6, height/2);
+                balls.secret_bob.request_pos(width*5/6, height/2);
+            });
+
+            //Mix and move secret back
+            animation_steps.push( ()=>{
+                balls.secret_alice.request_pos(width/6, height/4);
+                balls.secret_bob.request_pos(width*5/6, height/4);
+                balls["secret_both_a"] = generate_ball(width/6, height/2, "Sienna", "C+A+B Secret");
+                balls["secret_both_b"] = generate_ball(width*5/6, height/2, "Sienna", "C+A+B Secret");
+                balls.secret_both_a.request_pos(width/6, height*3/4);
+                balls.secret_both_b.request_pos(width*5/6, height*3/4);
+            });
+
+            //share the mixed values, remove the common.
+            animation_steps.push( ()=>{
+                balls.secret_both_a.request_pos(width*1/6, height/2);
+                balls.secret_both_b.request_pos(width*5/6, height/2);
+                balls.b_mix.request_pos(-width/6, height/2);
+                balls.a_mix.request_pos(width*7/6, height/2);
+                balls.secret_alice.request_pos(-width/6, height/2);
+                balls.secret_bob.request_pos(width*7/6, height/2);
+            });
             return;
         }
 
@@ -116,8 +168,8 @@ var DH_key_exchange = function () {
         ctx.beginPath();
         ctx.strokeStyle = "yellow";
         ctx.fillStyle = "yellow";
-        ctx.fillText("Client", width/6, height/10);
-        ctx.fillText("Server", width*5/6, height/10);
+        ctx.fillText("Alice", width/6, height/10);
+        ctx.fillText("Bob", width*5/6, height/10);
         ctx.fillText("Public Internet", width/2, height/10);
         ctx.setLineDash([4, 2]);
         ctx.moveTo(width/3, 0);
