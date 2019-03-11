@@ -87,7 +87,7 @@
 					<ul>
 						<li>Single point of failure (it had better have a good password)</li>
 						<li>You are trusting the company who provides the service.</li>
-						<li>Inconvenient.</li>
+						<li>Sometimes inconvenient.</li>
 						<li>Can be expensive.</li>
 					</ul>
 				</section>
@@ -147,6 +147,7 @@
 								<li>Fifty supercomputers that could check a billion billion AES keys per second
 									would, require about 3×10<sup>51</sup> years to crack AES-256.
 								</li>
+								<li>Unless you have a bad password. See <a href="https://en.wikipedia.org/wiki/Rainbow_table">rainbow tables</a> and <a href="https://en.wikipedia.org/wiki/Dictionary_attack">dictionary</a> attacks.</li>
 							</ul>
 						</li>
 					</ul>
@@ -199,17 +200,6 @@
 						src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Man-in-the-middle_attack_of_Diffie-Hellman_key_agreement.svg/300px-Man-in-the-middle_attack_of_Diffie-Hellman_key_agreement.svg.png">
 				</section>
 
-				<section>
-					<h2>Public Key Architecture</h2>
-
-					<p>One method we can use to verify someones identity is to ask a Certificate Authority if you are
-						talking to who you think you are talking to.</p>
-					<p>At the start of a connection, a request is made by the client to a Certificate Authority, trusted
-						by all parties, for a digital certificate
-						which serves for other users as a non-tamperable authentication of identity.</p>
-					<p>This list of certificate authorities is built into your web browser of operating system.</p>
-					<p>They are a sort of online notary that says "This public key belongs to this user."</p>
-				</section>
 			</section>
 
 			<section>
@@ -224,6 +214,8 @@
 						<div class="left-column">
 							<p>Anyone can access Alice's public key to encrypt a block of data, but only Bob can decrypt
 								it.</p>
+							<p>Don't lose control of that private key.</p>
+							<p>Is this really Alice's public key?</p>
 						</div>
 						<div class="left-column">
 							<img
@@ -236,6 +228,9 @@
 						<div class="left-column">
 							<p>Per session generated public key pairs can be used as part of the Diffie-Hellmen key
 								exchange.</p>
+							<p>This can be a problem if both private keys are eventually discovered. You lose 
+								perfect forward secrecy.</p>
+							<p>Am I really talking to Bob?</p>
 						</div>
 						<div class="left-column">
 							<img
@@ -248,6 +243,8 @@
 						<div class="left-column">
 							<p>Alice can use her private key to sign a message that Bob can then verify could only have
 								been signed by Alice.</p>
+							<p>You can mathematically prove to a third party that you are in possession of the private key.</p>
+							<p>But how do you know the public key you used the verify actually belongs to who you think it does?</p>
 						</div>
 						<div class="right-column">
 							<img
@@ -255,8 +252,31 @@
 						</div>
 					</div>
 				</section>
+				<section>
+						<section>
+								<h2>Public Key Architecture</h2>
+			
+								<p>One method we can use to verify someones identity is to ask a Certificate Authority if you are
+									talking to who you think you are talking to.</p>
+								<p>At the start of a connection, a request is made by the client to a Certificate Authority, trusted
+									by all parties, for a digital certificate
+									which serves for other users as a non-tamperable authentication of identity.</p>
+								<p>This list of certificate authorities is built into your web browser of operating system.</p>
+								<p>They are a sort of online notary that says "This public key belongs to this user."</p>
+							</section>
+				</section>
 			</section>
 
+			<section>
+				<section>
+					<h2>So what does HTTPS do?</h2>
+				</section>
+
+			</section>
+			<section>
+				<h2>Summary:</h2>
+
+			</section>
 
 		</div>
 	</div>

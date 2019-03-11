@@ -4,8 +4,8 @@ var DH_key_exchange = function () {
 
     const canvas_id="dh_key";
     const speed = 30;
-    const width = window.innerWidth*0.8;
-    const height = window.innerWidth*0.6;
+    const width = 600;
+    const height = 400;
     const radius = height/12;
     const velocity = width/100;
     var canvas = document.getElementById(canvas_id);
