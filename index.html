@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Tech Talk - Encryption and Online Security</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/css/zenburn.css">
+
+	<link rel="stylesheet" href="index.css">
+
+
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+				<h2>Tech Talk</h2>
+				<h1>Encryption and Online Security</h1>
+				<h4><small>Presented by Ryan Wicks</small></h4>
+			</section>
+
+			<section>
+				<h2>Overview</h2>
+				<ul>
+					<li>Practical Advice</li>
+					<li>Symmetric Encryption</li>
+					<li>Key Exchange Methods</li>
+					<li>Assymetric Encryption/Public Key Encryption</li>
+					<li>HTTPS</li>
+				</ul>
+			</section>
+
+			<section>
+				<section>
+				<h2>Practical Advice</h2>
+				<p>Here are some easy tips to improve you web security:</p>
+				<ul>
+					<li><a href="https://www.eff.org/https-everywhere">HTTPS Everywhere</a></li>
+					<li>Password Managers</li>
+					<li>Two-Factor Authentication</li>
+					<li>VPN's</li>
+				</ul>
+				</section>
+
+				<section>
+					<h2>Password Managers</h2>
+					<p>Using easy to remember passwords or reusing passwords is a really bad practice. One compromised account can mean all of
+						your accounts are compromised.</p>
+					<p>Password managers store your account and passwords securely in an encrypted file only you can open.</p>
+					<div id="pm_images">
+						<img src="https://assets.pcmag.com/media/images/565029-lastpass.png?thumb=y&width=90&height=50">
+						<img src="https://assets.pcmag.com/media/images/576263-agilebits-1password-logo.png?thumb=y&width=90&height=50">
+						<img src="https://assets.pcmag.com/media/images/584751-logmeonce-logo.png?thumb=y&width=90&height=50">
+						<img src="https://assets.pcmag.com/media/images/563514-dashlane-logo.png?thumb=y&width=90&height=50">
+						<img src="https://assets.pcmag.com/media/images/563678-keeper-password-manager-digital-vault.png?thumb=y&width=90&height=50">
+						<img src="https://assets.pcmag.com/media/images/534617-password-boss-premium-v2-0.jpg?thumb=y&width=90&height=50">
+						<img src="https://assets.pcmag.com/media/images/557414-true-key-by-intel-security.png?thumb=y&width=90&height=50">
+					</div>
+				</section>
+				<section>
+					<h3>Pro's</h3>
+					<ul>
+						<li>Only remember 1 password</li>
+						<li>Can use randomly generated, long, unique and unguessable passwords for each account.</li>
+						<li>Easy syncing across devices without giving all your data to Google or Apple with some services.</li>
+						<li>No more saving passwords and forms in a browser.</li>
+					</ul>
+					<h3>Con's</h3>
+						<ul>
+							<li>Single point of failure (it had better have a good password)</li>
+							<li>You are trusting the company who provides the service.</li>
+							<li>Inconvenient.</li>
+							<li>Can be expensive.</li>
+						</ul>
+				</section>
+				<section>
+					<h2>Two Factor Authentication</h2>
+					<p>Logins require you to provide two different bits of information to log into account. These are usually:</p>
+					<ul>
+						<li>Something you know:
+							<ul><li>A password</li></ul>
+						</li>
+						<li>Something you have:
+							<ul>
+								<li>A cellphone (SMS, one time password)</li>
+								<li>A two factor device (<a href="https://www.yubico.com/">Yubikey</a>, <a href="https://cloud.google.com/titan-security-key/">Google Titan</a>)</li>
+								<li>A body (biometrics)</li>
+								<li>A public/private key pair</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>VPN's</h2>
+					<p>Virtual Private Network encrypts all of your network traffic from you device to a server somewhere in the world (not just http traffic). 
+						It's been used historically for accessing internal company networks from outside the company, but is often used to prevent eavesdropping on
+						all traffic leaving a computer.</p>
+					<p>It might not be needed for everyone, but definitely handy when using public wifi, or when travelling.</p>
+				</section>
+			</section>
+
+			<section>
+				<section> 
+					<h2>Symmetric Encryption</h2>
+					<p>The same password is used to encrypt and decrypt a chunk of data.</p>
+					<p>Once you will see often is AES, a block cipher adopted by the US government and used worldwide.</p>
+					<p>For <a href="https://aesencryption.net/">example</a>, using AES-256 on:</p>
+					<blockquote>The quick brown fox jumped over the lazy brown dog</blockquote>
+					<p>with the password "a_bad_password" produces the ciphertext:</p>
+					<blockquote style="word-wrap: break-word">ri6ZJ5koTwUSr8vYNDS0U2xF1Dy4vf4iL//NAvCPNHQM7WZzxkbuKn3sUQvR7Lsv6uYXGE8h81jFy5nj7YVhmg==</blockquote>
+				</section>
+
+				<section>
+					<h3>Pro's</h3>
+					<ul>
+						<li>Fast to encrypt and decrypt (Your cellphone storage is probably encrypted right now.)</li>
+						<li>Hard to break:
+							<ul> 
+								<li>Fifty supercomputers that could check a billion billion AES keys per second 
+							 would, require about 3×10<sup>51</sup> years to crack AES-256.
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<h3>Con's</h3>
+					<ul>
+						<li>When sending data, the key needs to be transferred somehow.</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>Key Exchange Methods</h3>
+					<p>Symmetric encryption is great for encrypting data being sent between two parties, but how do we let the other party know what the key is?</p>
+					<ul>
+						<li>Out of band methods:
+							<ul>
+								<li>Courier</li>
+								<li>Phone call</li>
+								<li>Diplomatic bag</li>
+							</ul>
+						</li>
+						<li>In band methods:
+							<ul>
+								<li>Diffie-Hellman key exchange</li>
+								<li>Public Key Architecture (Certificate Authorities)</li>
+								<li>Web of Trust</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Diffie-Hellman Key Exchange</h2>
+					<div id="dh_key_div"> <canvas id="dh_key" width="600px" height="600px"></canvas> </div>
+				</section>
+			</section>
+			
+            
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			margin: 0.15,
+			history: true,
+			dependencies: [
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js' },
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/markdown.js' },
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/notes/notes.js', async: true },
+				{ src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+	<script src="encryption_talk.js"></script>
+</body>
+
+</html>

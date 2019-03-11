@@ -1,0 +1,42 @@
+p { 
+    text-align: left; 
+}
+
+h3 {
+    text-align: left;
+}
+
+.reveal p {
+    font-size: 75%;
+}
+
+.reveal li {
+    font-size: 75%;
+}
+
+.image-2-col-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.image-2-col-container p {
+    text-align: center;
+    font-size: 10;
+}
+
+.image-2-col-container img {
+    max-width: 75%;
+    max-height: 80%;
+    height: auto;
+}
+
+.left-col {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.right-col {
+    grid-column: 2;
+    grid-row: 1;
+}
