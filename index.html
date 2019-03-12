@@ -263,6 +263,8 @@
 									which serves for other users as a non-tamperable authentication of identity.</p>
 								<p>This list of certificate authorities is built into your web browser of operating system.</p>
 								<p>They are a sort of online notary that says "This public key belongs to this user."</p>
+								<p>Can you trust your CA?</p>
+
 							</section>
 				</section>
 			</section>
@@ -270,12 +272,23 @@
 			<section>
 				<section>
 					<h2>So what does HTTPS do?</h2>
+					 <p>Secure web communication. An extension of SSL (secure sockets layer).</p>
+
+					 <ol>
+						 <li>Say Hello to the server (literally, the client sends a ClientHello message.)</li>
+						 <li>Certificate Exchange - the server sends a signed certificate that the client checks.</li>
+						 <li>Key Exchange - depends on algorithm chosen in step 1.</li>
+					 </ol>
 				</section>
 
 			</section>
 			<section>
 				<h2>Summary:</h2>
-
+				<ul>
+					<li>There are some easy things you can do to greatly increase your own security online.</li>
+					<li>Encryption and cryptography make it possible to communicate securely.</li>
+					<li>Trust is a big (biggest?) issue in online security.</li>
+				</ul>
 			</section>
 
 		</div>
